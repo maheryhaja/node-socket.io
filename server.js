@@ -7,7 +7,15 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
 
-const app = express();
+var bodyParser = require('body-parser')
+
+var app = express()
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 const server = app
     .listen(PORT, () => console.log(`Listening on ${ PORT }`));
@@ -69,6 +77,8 @@ app.post('/webhook', function (req, res) {
 
 
 
+  // Make sure this is a page subscription
+  if (data.object === 'page') {
 
     // Iterate over each entry - there may be multiple if batched
     data.entry.forEach(function(entry) {
@@ -92,7 +102,7 @@ app.post('/webhook', function (req, res) {
     // will time out and we will keep trying to resend.
       log = "all good "
     res.sendStatus(200);
-  
+  }
 });
 
 function receivedMessage(event) {
