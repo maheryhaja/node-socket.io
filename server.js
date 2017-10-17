@@ -7,11 +7,11 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
 
-const server = express()
+const app = express()
   .use((req, res) => res.sendFile(INDEX) )
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-const io = socketIO(server);
+const io = socketIO(app);
 
 
 var log = "Logger";
@@ -156,6 +156,5 @@ function callSendAPI(messageData) {
 }
 
 
-console.log("try to launch"+process.env.PORT || process.env.port || process.env.OPENSHIFT_NODEJS_PORT || 8080+" ip"+process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0");
 
 
