@@ -8,10 +8,11 @@ const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
 
 const app = express();
-    app
+
+const server = app
     .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-const io = socketIO(app);
+const io = socketIO(server);
 
 
 var log = "Logger";
