@@ -69,8 +69,6 @@ app.post('/webhook', function (req, res) {
 
 
 
-  // Make sure this is a page subscription
-  if (data.object === 'page') {
 
     // Iterate over each entry - there may be multiple if batched
     data.entry.forEach(function(entry) {
@@ -94,7 +92,7 @@ app.post('/webhook', function (req, res) {
     // will time out and we will keep trying to resend.
       log = "all good "
     res.sendStatus(200);
-  }
+  
 });
 
 function receivedMessage(event) {
