@@ -101,7 +101,7 @@ app.post('/webhook', function (req, res) {
     // You must send back a 200, within 20 seconds, to let us know
     // you've successfully received the callback. Otherwise, the request
     // will time out and we will keep trying to resend.
-      log = "all good "
+      log += "all good "
     res.sendStatus(200);
   }
 });
@@ -109,8 +109,8 @@ app.post('/webhook', function (req, res) {
 function receivedMessage(event) {
   // Putting a stub for now, we'll expand it in the following steps
 
-  log += "Sender id: " + senderID + " ";
   senderID = event.sender.id;
+  log += "Sender id: " + senderID + " ";
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
   var message = event.message;
@@ -124,7 +124,7 @@ function receivedMessage(event) {
     senderID: senderID
   });
 
-    log = "last message" + event.message;
+    log += "last message" + event.message;
 
 }
 
