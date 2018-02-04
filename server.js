@@ -24,7 +24,7 @@ const server = app
 const io = socketIO(server);
 
 
-var log = "Logger";
+var log = "Application Log: ";
 var senderID ="1517502958270862";
 
 
@@ -46,7 +46,7 @@ io.on('connection',function(socket) {
   console.log("nouvelle connexion");
 
   socket.on("reponse", function(data){
-    log += "receive message from client";
+    log = "receive message from client";
     sendTextMessage(senderID, data);
   });
 
@@ -104,7 +104,7 @@ app.post('/webhook', function (req, res) {
     // You must send back a 200, within 20 seconds, to let us know
     // you've successfully received the callback. Otherwise, the request
     // will time out and we will keep trying to resend.
-      log += "all good "
+      log = "all good "
     res.sendStatus(200);
   }
 });
@@ -113,7 +113,7 @@ function receivedMessage(event) {
   // Putting a stub for now, we'll expand it in the following steps
 
   senderID = event.sender.id;
-  log += "Sender id: " + senderID + " ";
+  log = "Sender id: " + senderID + " ";
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
   var message = event.message;
@@ -127,7 +127,7 @@ function receivedMessage(event) {
     senderID: senderID
   });
 
-    log += "last message" + event.message;
+    log = "last message" + event.message;
 
 }
 
@@ -145,7 +145,7 @@ function sendTextMessage(recipientId, messageText) {
 }
 
 function callSendAPI(messageData) {
-  log += "try to send message";
+  log = "try to send message";
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: "EAAHdZCoHq2T8BAMC7HYixhJnpPB5UCjSC2ZC0Mmtdqs3IIIf39a49mB8f4o0VaOzadT2cHE2YW3OdO3mbdGZAZCp0pHv1ohyszWiFekCdXbOZCog8ZAmLNwTGDZBAQUlMZAF1kYPUw2n0keP0MktkDfElrx4y7FSXRMXrZAjwKKRI6wZDZD" },
@@ -158,12 +158,12 @@ function callSendAPI(messageData) {
     if (!error && response.statusCode == 200) {
       var recipientId = body.recipient_id;
       var messageId = body.message_id;
-      log +="nety uhannnn ";
+      log ="nety uhannnn ";
       console.log("Successfully sent generic message with id %s to recipient %s",
           messageId, recipientId);
     } else {
       console.error("Unable to send message.");
-      log  +="impossible ";
+      log  ="impossible ";
       console.error(response);
       console.error(error);
     }
