@@ -52,7 +52,9 @@ io.on('connection',function(socket) {
 
 });
 
-
+app.get("/notification", function (req, res) {
+  return res.send("Notification works");
+});
 
 
 app.get("/bonjour",  function(req, res){
