@@ -52,8 +52,9 @@ io.on('connection',function(socket) {
 
 });
 
-app.get("/notification", function (req, res) {
-  return res.send("Notification works");
+app.post("/notifier", function(req, res) {
+  notifierNouveauMessage("notification", req.body);
+  res.send("ok");
 });
 
 
